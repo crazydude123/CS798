@@ -61,6 +61,16 @@ for i in df:
    if i[0]<0 or i[1]<0:
       print(i)
 
+from sklearn.metrics import silhouette_score
+
+sil = []
+kmax = 10
+for k in range(2, kmax+1):
+   kmeans = KMeans(n_clusters = k).fit(df)
+   labels = kmeans.labels_
+   sil.append(silhouette_score(df, labels, metric = 'euclidean'))
+print(sil)
+
 pca = PCA(2)
 df = pca.fit_transform(df)
 
